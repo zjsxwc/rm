@@ -156,6 +156,8 @@ function check_invoker()
     PARENT_COMMAND=$(ps $PPID | tail -n 1 | awk "{print \$5}")
     if [ $PARENT_COMMAND == '-bash' ]; then
         check_trash_directory $@
+    elif [ $PARENT_COMMAND == 'bash' ]; then
+        check_trash_directory $@
     else
         /bin/rm $@
         exit 0
