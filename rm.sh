@@ -123,6 +123,7 @@ function move_to_trash()
 {
     for i in "${TO_DELETE[@]}";do
         FILENAME=$i
+        FILENAME=${FILENAME//\//__}
         FILENAME+="_"
         FILENAME+=$(date +"%H_%M_%S")
         if [ -d $i ] && $RECURSIVE ;then
@@ -157,7 +158,7 @@ function check_invoker()
     if [ $PARENT_COMMAND == '-bash' ]; then
         check_trash_directory $@
     elif [ $PARENT_COMMAND == 'bash' ]; then
-        check_trash_directory $@
+    	check_trash_directory $@
     else
         /bin/rm $@
         exit 0
